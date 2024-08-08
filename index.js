@@ -2,28 +2,25 @@ const puppeteer = require('puppeteer');
 
 (async () => {
   try {
-    // Lanzar el navegador
-    const browser = await puppeteer.launch({ headless: false }); // Cambia a true si no quieres ver el navegador
+    // init browser
+    const browser = await puppeteer.launch({ headless: false }); // change to true if you don't want to see the browser
     const page = await browser.newPage();
 
-    // Navegar a la página web deseada
-    await page.goto('https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/FrameCriterioBusquedaWeb.jsp'); // Reemplaza con la URL de la página que deseas abrir
+    // go to the page 
+    await page.goto('https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/FrameCriterioBusquedaWeb.jsp'); 
+    
+    await page.waitForSelector('#txtRuc'); // Selector 
+    await page.type('#txtRuc', '20100190797'); // codigo (RUC)
 
-    // Esperar a que el campo de entrada esté disponible y luego escribir el código
-    await page.waitForSelector('#txtRuc'); // Selector basado en el id del campo de entrada
-    await page.type('#txtRuc', '1076066728'); // Reemplaza con el código que deseas pegar
+    await new Promise(resolve => setTimeout(resolve, 1000)); // sLeep 1 second
 
-    // Esperar un poco más para asegurarse de que el campo esté lleno
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Pausa de 1 segundo
-
-    // Esperar a que el botón de buscar esté disponible y visible, y luego hacer clic
     await page.waitForSelector('#btnAceptar', { visible: true });
     await page.click('#btnAceptar');
 
     // Esperar unos segundos para ver los resultados (opcional)
     await new Promise(resolve => setTimeout(resolve, 5000)); // Pausa de 5 segundos
 
-    // Cerrar el navegador
+    //close the browser
   } catch (error) {
     console.error('Error:', error);
   }
