@@ -4,16 +4,16 @@ const puppeteer = require('puppeteer');
   try {
     // Array de RUCs
     const rucs = [
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1',
-      'RUC1'
+      ' ',
+      ' ',
+      ' ',
+      ' ',
+      ' ',
+      ' ',
+      ' ',
+      ' ',
+      ' ',
+      ' '
     ];
 
     // Init browser
@@ -26,7 +26,7 @@ const puppeteer = require('puppeteer');
         await page.goto('https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/FrameCriterioBusquedaWeb.jsp'); 
         
         await page.waitForSelector('#txtRuc'); // Selector 
-        await page.type('#txtRuc', ruc ); // RUC code
+        await page.type('#txtRuc', ruc); // RUC code
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Sleep 1 second
 
@@ -48,9 +48,6 @@ const puppeteer = require('puppeteer');
           preferCSSPageSize: true,
           margin: { top: '0.5in', right: '0.5in', bottom: '0.5in', left: '0.5in' }
         });
-
-        // Optional: clear input field for the next RUC
-        await page.evaluate(() => document.querySelector('#txtRuc').value = '');
 
       } catch (error) {
         console.error(`Error processing RUC ${ruc}:`, error);
